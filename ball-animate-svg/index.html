@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="css/style.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+</head>
+<body>
+    <header>
+        <h1>Ball animate SVG</h1>
+    </header>
+    <section>
+        <div class="controls">
+            <div class="control">
+                <label>Radius:</label>
+                <input type="text" id="txtRadius" value="20" />
+            </div>
+            <div class="control">
+                <label>X Position:</label>
+                <input type="text" id="txtXPos" value="0" />
+            </div>
+            <div class="control">
+                <label>Y Position:</label>
+                <input type="text" id="txtYPos" value="0" />
+            </div>
+            <div class="control">
+                <label>Speed:</label>
+                <input type="text" id="txtSpeed" value="1" />
+            </div>
+            <div class="control">
+                <label>Color:</label>
+                <select id="cmbColor">
+                    <option value="#000" class="color-black">Black</option>
+                    <option value="#f00" class="color-red" selected="selected">Red</option>
+                    <option value="#00f" class="color-blue">Blue</option>
+                    <option value="#0f0" class="color-green">Green</option>
+                </select>
+            </div>
+            <div class="control">
+                <label>Direction:</label>
+                <select id="cmbDirection">
+                    <option value="horizontal">Horizontal</option>
+                    <option value="vertical">Vertical</option>
+                    <option value="diagonal" selected="selected">Diagonal</option>
+                </select>
+            </div>
+            <div class="control">
+                <button onclick="add()">Add</button>
+                <button onclick="stop()">Stop</button>
+            </div>
+        </div>
+        <div class="pool" id="pool">
+            <svg height="100%" width="100%" id="svgPool">
+
+            </svg>
+        </div>
+    </section>
+    <div id="overlay">
+        <button onclick="start()" class="action">Start</button>
+    </div>
+    <script src="js/ball.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/controller.js"></script>
+    <script>
+
+        function start()
+        {
+        }
+
+        function stop()
+        {
+        }
+
+        function add()
+        {
+        }
+
+    </script>
+</body>
+</html>
