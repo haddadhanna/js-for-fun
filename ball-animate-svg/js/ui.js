@@ -67,8 +67,18 @@ APP.UI = function ()
             point.x = e.clientX;
             point.y = e.clientY;
             point = point.matrixTransform(matrix);
-            _dragTheBall.Item.setAttributeNS(null, 'cx', point.x - _dragTheBall.StartPosition.X);
-            _dragTheBall.Item.setAttributeNS(null, 'cy', point.y - _dragTheBall.StartPosition.Y);
+
+            //prevent drag outside svg boundaries
+            var radius = parseFloat(_dragTheBall.Item.getAttributeNS(null, 'r'));
+            var newX = point.x - _dragTheBall.StartPosition.X - radius < 0 ? radius
+                    : _poolContainer.clientWidth < point.x - _dragTheBall.StartPosition.X + radius ? _poolContainer.clientWidth - radius
+                    : point.x - _dragTheBall.StartPosition.X;
+            var newY = point.y - _dragTheBall.StartPosition.Y - radius < 0 ? radius
+                : _poolContainer.clientHeight < point.y - _dragTheBall.StartPosition.Y + radius ? _poolContainer.clientHeight - radius
+                    : point.y - _dragTheBall.StartPosition.Y;
+
+            _dragTheBall.Item.setAttributeNS(null, 'cx', newX);
+            _dragTheBall.Item.setAttributeNS(null, 'cy', newY);
         }
     };
     var _endDrag = function ()
