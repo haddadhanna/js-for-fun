@@ -15,10 +15,10 @@ APP.Ball = function ()
     {
         if (stats !== undefined)
         {
-            _speed = parseInt(stats.speed) || _speed;
-            _radius = parseInt(stats.radius) || _radius;
-            _xpos = parseInt(stats.x_pos) || _xpos;
-            _ypos = parseInt(stats.y_pos) || _ypos;
+            _speed = parseFloat(stats.speed) || _speed;
+            _radius = parseFloat(stats.radius) || _radius;
+            _xpos = parseFloat(stats.x_pos) || _xpos;
+            _ypos = parseFloat(stats.y_pos) || _ypos;
             _color = stats.color || _color;
             _direction = stats.direction || _direction;
         }
@@ -29,7 +29,7 @@ APP.Ball = function ()
     {
         if (r === undefined)
             return _radius;
-        _radius = parseInt(r);
+        _radius = parseFloat(r);
     };
 
     //getter and setter for speed
@@ -37,7 +37,7 @@ APP.Ball = function ()
     {
         if (s === undefined)
             return _speed;
-        _speed = parseInt(s);
+        _speed = parseFloat(s);
     };
 
     //getter and setter for color
@@ -53,8 +53,8 @@ APP.Ball = function ()
     {
         if (x === undefined || y === undefined)
             return { x: _xpos, y: _ypos };
-        _xpos = parseInt(x);
-        _ypos = parseInt(y);
+        _xpos = parseFloat(x);
+        _ypos = parseFloat(y);
     };
 
     //getter and setter for direction

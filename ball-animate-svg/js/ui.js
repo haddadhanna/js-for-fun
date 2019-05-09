@@ -6,7 +6,11 @@ APP.UI = function ()
     var _isGameOnUI = false;
     var _dragTheBall = {
         IsDoingDrag: false,
-        Item: null
+        Item: null,
+        StartPosition: {
+            X:0,
+            Y:0
+        }
     };
 
     var _animate = function (ctx, speedX, speedY, direction)
@@ -18,14 +22,14 @@ APP.UI = function ()
                 var radius = parseFloat(ctx.getAttributeNS(null, 'r'));
                 if (direction === APP.DIRECTION_HORIZONTAL || direction === APP.DIRECTION_DIAGONAL)
                 {
-                    var nx = parseInt(ctx.getAttributeNS(null, 'cx'));
+                    var nx = parseFloat(ctx.getAttributeNS(null, 'cx'));
                     //iza l position t5ata l 7doud then reverse movement (x-axis)
                     speedX = _poolContainer.clientWidth < nx + speedX + radius || nx + speedX - radius <= 0 ? -1 * speedX : speedX;
                     ctx.setAttributeNS(null, 'cx', nx + speedX);
                 }
                 if (direction === APP.DIRECTION_VERTICAL || direction === APP.DIRECTION_DIAGONAL)
                 {
-                    var ny = parseInt(ctx.getAttributeNS(null, 'cy'));
+                    var ny = parseFloat(ctx.getAttributeNS(null, 'cy'));
                     //iza l position t5ata l 7doud then reverse movement (y-axis)
                     speedY = _poolContainer.clientHeight < ny + speedY + radius || ny + speedY - radius <= 0 ? -1 * speedY : speedY;
                     ctx.setAttributeNS(null, 'cy', ny + speedY);
@@ -37,6 +41,14 @@ APP.UI = function ()
     {
         if (e.target.tagName === 'circle')
         {
+            var matrix = _container.getScreenCTM().inverse();
+            var point = _container.createSVGPoint();
+            point.x = e.clientX;
+            point.y = e.clientY;
+            point = point.matrixTransform(matrix);
+
+            _dragTheBall.StartPosition.X = point.x - parseFloat(e.target.getAttributeNS(null, "cx"));
+            _dragTheBall.StartPosition.Y = point.y - parseFloat(e.target.getAttributeNS(null, "cy"));
             _dragTheBall.Item = e.target;
             _dragTheBall.IsDoingDrag = true;
         }
@@ -54,14 +66,20 @@ APP.UI = function ()
             point.x = e.clientX;
             point.y = e.clientY;
             point = point.matrixTransform(matrix);
-            _dragTheBall.Item.setAttributeNS(null, 'cx', point.x);
-            _dragTheBall.Item.setAttributeNS(null, 'cy', point.y);
+            _dragTheBall.Item.setAttributeNS(null, 'cx', point.x - _dragTheBall.StartPosition.X);
+            _dragTheBall.Item.setAttributeNS(null, 'cy', point.y - _dragTheBall.StartPosition.Y);
         }
     };
-    var _endDrag = function (e)
+    var _endDrag = function ()
     {
-        _dragTheBall.IsDoingDrag = false;
-        _dragTheBall.Item = null;
+        _dragTheBall = {
+            IsDoingDrag: false,
+            Item: null,
+            StartPosition: {
+                X: 0,
+                Y: 0
+            }
+        };
     };
 
     this.init = function ()
@@ -96,7 +114,7 @@ APP.UI = function ()
             circle.setAttributeNS(null, 'r', theR);
             circle.setAttributeNS(null, 'style', 'fill:' + ball.color());
             _container.appendChild(circle);
-           // setInterval(_animate(circle, ball.speed(), ball.speed(), ball.direction()), 10);
+            setInterval(_animate(circle, ball.speed(), ball.speed(), ball.direction()), 10);
             this.feed('circle is added');
         }
     };
