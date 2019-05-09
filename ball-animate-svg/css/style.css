@@ -1,2 +1,72 @@
-﻿body {
+﻿/* reset */
+html, body, h1 {
+    margin: 0px;
+    padding: 0px;
+}
+/* end reset */
+
+
+html, body {
+    height: 100%;
+}
+
+header {
+    padding: 10px;
+    background-color: #660033;
+    color: #fff;
+    height: 40px;
+}
+
+section {
+    height: calc(100% - 64px);
+}
+
+.controls {
+    display: inline-block;
+    float: left;
+    width: 200px;
+    height: 100%;
+    background-color: #d9d9d9;
+}
+
+.pool {
+    display: inline-block;
+    width: calc(100% - 200px);
+    height: 100%;
+    background-color: #f2f2f2;
+}
+
+.control {
+    padding: 5px;
+}
+
+    .control label {
+        color: #660033;
+        min-width: 75px;
+        display: inline-block;
+    }
+
+    .control input {
+        width: 100px;
+    }
+
+    .control select {
+        width: 104px;
+    }
+
+.action {
+    position: relative;
+    top: 30%;
+    left: 50%;
+    width: 100px;
+    height: 50px;
+}
+
+#overlay {
+    background-color: gray;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    opacity: 0.5;
 }

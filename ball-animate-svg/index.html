@@ -49,7 +49,7 @@
                 <button onclick="stop()">Stop</button>
             </div>
         </div>
-        <div class="pool" id="pool">
+        <div class="pool" id="pool" ondragstart="return false;" ondrop="return false;">
             <svg height="100%" width="100%" id="svgPool">
 
             </svg>
@@ -65,14 +65,26 @@
 
         function start()
         {
+            document.getElementById('overlay').style.display = 'none';
+            APP.Controller.startGame();
         }
 
         function stop()
         {
+            document.getElementById('overlay').style.display = 'block';
+            APP.Controller.stopGame();
         }
 
         function add()
         {
+            APP.Controller.addBall({
+                speed: document.getElementById('txtSpeed').value,
+                x_pos: document.getElementById('txtXPos').value,
+                y_pos: document.getElementById('txtYPos').value,
+                radius: document.getElementById('txtRadius').value,
+                color: document.getElementById('cmbColor').value,
+                direction: document.getElementById('cmbDirection').value,
+            });
         }
 
     </script>
