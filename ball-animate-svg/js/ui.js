@@ -13,11 +13,12 @@ APP.UI = function ()
         }
     };
 
+
     var _animate = function (ctx, speedX, speedY, direction)
     {
         return function ()
         {
-            if (_isGameOnUI === true)
+            if (_isGameOnUI === true && (_dragTheBall.Item === null || _dragTheBall.Item.id !== ctx.id))
             {
                 var radius = parseFloat(ctx.getAttributeNS(null, 'r'));
                 if (direction === APP.DIRECTION_HORIZONTAL || direction === APP.DIRECTION_DIAGONAL)
@@ -113,6 +114,7 @@ APP.UI = function ()
             circle.setAttributeNS(null, 'cy', theY);
             circle.setAttributeNS(null, 'r', theR);
             circle.setAttributeNS(null, 'style', 'fill:' + ball.color());
+            circle.id = "c_" + Math.random().toString(20).substring(2, 10);
             _container.appendChild(circle);
             setInterval(_animate(circle, ball.speed(), ball.speed(), ball.direction()), 10);
             this.feed('circle is added');
