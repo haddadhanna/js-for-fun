@@ -33,7 +33,7 @@ section {
     display: inline-block;
     width: calc(100% - 200px);
     height: 100%;
-    /*background-color: #f2f2f2;*/
+    background-color: #f2f2f2;
 }
 
 .control {

@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        div{
+            width:50px;
+            height:50px;
+        }
+    </style>
+</head>
+<body>
+    <input type='text' id="txtHex" /> <button onclick="render()">render</button>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <script src="../js/color.js"></script>
+    <script>
+        function render()
+        {
+            var hex = document.getElementById('txtHex').value;
+            var dark = APP.Color.darken_hex(hex);
+            document.getElementById('div1').style.backgroundColor = "#" + hex;
+            document.getElementById('div2').style.backgroundColor = "#" + dark;
+        }
+    </script>
+</body>
+</html>

@@ -13,7 +13,6 @@ APP.UI = function ()
         }
     };
 
-
     var _animate = function (ctx, speedX, speedY, direction)
     {
         return function ()
@@ -92,6 +91,42 @@ APP.UI = function ()
             }
         };
     };
+    var _generateGradient = function (id, color)
+    {
+        var grad = document.createElementNS("http://www.w3.org/2000/svg", 'radialGradient');
+        grad.setAttributeNS(null, 'id', "g_" + id);
+        grad.setAttributeNS(null, 'fx', "30%");
+        grad.setAttributeNS(null, 'fy', "30%");
+        var stop1 = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+        stop1.setAttributeNS(null, 'offset', "0%");
+        stop1.setAttributeNS(null, 'style', "stop-color:#FFFFFF");
+        var stop2 = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+        stop2.setAttributeNS(null, 'offset', "40%");
+        stop2.setAttributeNS(null, 'style', "stop-color:" + color);
+        var stop3 = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+        stop3.setAttributeNS(null, 'offset', "100%");
+        stop3.setAttributeNS(null, 'style', "stop-color:#" + APP.Color.darken_hex(color.replace('#', '')));
+        grad.appendChild(stop1);
+        grad.appendChild(stop2);
+        grad.appendChild(stop3);
+        return grad;
+    };
+    var _generateBall = function (id, ball)
+    {
+        var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+        var theX = ball.position().x;
+        var theY = ball.position().y;
+        var theR = ball.radius();
+        //adjust the position of the ball if the ball is outside the container
+        theX = theX - theR < 0 ? theR : theX + theR > _poolContainer.clientWidth ? _poolContainer.clientHeight - theR : theX;
+        theY = theY - theR < 0 ? theR : theY + theR > _poolContainer.clientHeight ? _poolContainer.clientHeight - theR : theY;
+        circle.setAttributeNS(null, 'cx', theX);
+        circle.setAttributeNS(null, 'cy', theY);
+        circle.setAttributeNS(null, 'r', theR);
+        circle.setAttributeNS(null, 'style', 'fill:url(#g_' + id + ')');
+        circle.setAttributeNS(null, 'id', "c_" + id);
+        return circle;
+    };
 
     this.init = function ()
     {
@@ -113,19 +148,13 @@ APP.UI = function ()
     {
         if (ball !== undefined)
         {
-            var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-            var theX = ball.position().x;
-            var theY = ball.position().y;
-            var theR = ball.radius();
-            //adjust the position of the ball if the ball is outside the container
-            theX = theX - theR < 0 ? theR : theX + theR > _poolContainer.clientWidth ? _poolContainer.clientHeight - theR : theX;
-            theY = theY - theR < 0 ? theR : theY + theR > _poolContainer.clientHeight ? _poolContainer.clientHeight - theR : theY;
-            circle.setAttributeNS(null, 'cx', theX);
-            circle.setAttributeNS(null, 'cy', theY);
-            circle.setAttributeNS(null, 'r', theR);
-            circle.setAttributeNS(null, 'style', 'fill:' + ball.color());
-            circle.id = "c_" + Math.random().toString(20).substring(2, 10);
+            var generId = Math.random().toString(20).substring(2, 10);
+            var circle = _generateBall(generId, ball);
+            var gradiant = _generateGradient(generId, ball.color());
+
             _container.appendChild(circle);
+            document.getElementById('def1').appendChild(gradiant);
+
             setInterval(_animate(circle, ball.speed(), ball.speed(), ball.direction()), 10);
             this.feed('circle is added');
         }
