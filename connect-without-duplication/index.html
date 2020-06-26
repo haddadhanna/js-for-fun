@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="js/app.js"></script>
+    <script>
+        var manager = new APP.Manager(
+            APP.TestCase.House.Points,
+            APP.TestCase.House.Routes,
+            APP.TestCase.House.Depth
+        );
+        manager.Run();
+        var retval = manager.GetResults();
+        var container = document.getElementById('container');
+        for (index in retval)
+        {
+            var span = document.createElement("span");
+            span.style = "display:block";
+            span.innerText = "(" + index + ") -";
+            for (i in retval[index])
+            {
+                span.innerText += retval[index][i].start + "" + retval[index][i].end + "-";
+            }
+            container.appendChild(span);
+        }
+    </script>
+</body>
+</html>
