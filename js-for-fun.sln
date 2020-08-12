@@ -63,6 +63,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "me", "me\", "{9D3BAD38-E589
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "2394"
+		SlnRelativePath = "me\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ugly-board", "ugly-board\", "{3BBC445F-2ACB-4CB3-8FED-2D8C1FC46AF7}"
@@ -83,6 +84,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ugly-board", "ugly-board\",
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "2397"
+		SlnRelativePath = "ugly-board\"
 	EndProjectSection
 EndProject
 Global
