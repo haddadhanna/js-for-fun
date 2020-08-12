@@ -42,6 +42,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "connect-without-duplication
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "24626"
+		SlnRelativePath = "connect-without-duplication\"
 	EndProjectSection
 EndProject
 Global
