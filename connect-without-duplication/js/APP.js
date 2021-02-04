@@ -16,6 +16,7 @@ APP.Manager = function (points, routes, depth)
     this.GetResults = () => _result;
     this.Run = function ()
     {
+        _result = [];
         for (index in _points)
         {
             _GetRoute(_points[index], []);
@@ -61,6 +62,10 @@ APP.Path = function (start, end)
 APP.TestCase = {};
 APP.TestCase.Triangle = {
     Points: ["A", "B", "C"],
+    PointsDraw: [   { pts: "A", x:150, y: 50},
+                    { pts: "B", x:80, y: 150},
+                    { pts: "C", x:220, y: 150},
+                ],
     Routes: [
         new APP.Path("A", "B"),
         new APP.Path("A", "C"),
@@ -73,6 +78,12 @@ APP.TestCase.Triangle = {
 };
 APP.TestCase.House = {
     Points: ["A", "B", "C", "D", "E"],
+    PointsDraw: [   { pts: "A", x:150, y: 50},
+                    { pts: "B", x:80, y: 150},
+                    { pts: "E", x:220, y: 150},
+                    { pts: "C", x:80, y: 350},
+                    { pts: "D", x:220, y: 350},
+                ],
     Routes: [
         new APP.Path("A", "B"),
         new APP.Path("A", "E"),
@@ -95,6 +106,15 @@ APP.TestCase.House = {
 };
 APP.TestCase.Star = {
     Points: ["A", "B", "C", "D", "E", "F", "G", "H"],
+    PointsDraw: [   { pts: "A", x:200, y: 170},
+                    { pts: "B", x:160, y: 190},
+                    { pts: "C", x:200, y: 210},
+                    { pts: "E", x:240, y: 210},
+                    { pts: "D", x:220, y: 250},
+                    { pts: "F", x:280, y: 190},
+                    { pts: "G", x:240, y: 170},
+                    { pts: "H", x:220, y: 130},
+                ],
     Routes: [
         new APP.Path("A", "B"),
         new APP.Path("A", "C"),
