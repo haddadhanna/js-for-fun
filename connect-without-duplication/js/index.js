@@ -1,4 +1,5 @@
 var manager, testcase, canvasContainer, ctx;
+var speed = 30;
 var radius = 3;
 (function () {
     canvasContainer = document.getElementById("myCanvas");
@@ -114,7 +115,6 @@ function clearCanvas() {
 
 function showSolution(solution) {
     var pts = [];
-    var speed = 100;
 
     for (var i = 0; i < solution.length; i++) {
         var pt1 = testcase.PointsDraw.find(element => element.pts === solution[i].start);
